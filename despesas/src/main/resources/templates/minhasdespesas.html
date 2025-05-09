@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Despesas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .bg-dark-green {
+            background-color: #006400;
+        }
+
+        .nav-link.sobre {
+            color: #fff !important;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+            padding: 20px;
+        }
+
+        table {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        th.acao-col {
+            width: 10%;
+        }
+    </style>
+</head>
+<body>
+<header class="navbar navbar-expand-lg navbar-dark bg-dark-green">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" th:href="@{/}">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/gestao-despesas/cadastrar-despesa}">Cadastrar uma Despesa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/gestao-despesas/minhas-despesas}">Minhas Despesas</a>
+                </li>
+            </ul>
+            <a class="nav-link sobre" th:href="@{/gestao-despesas/sobre}">Sobre</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <h1 class="text-center">Minhas Despesas</h1>
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nome da Despesa</th>
+            <th>Tipo</th>
+            <th>Valor</th>
+            <th>Descrição</th>
+            <th class="acao-col">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="despesa : ${despesas}">
+            <td th:text="${despesa.id}"></td>
+            <td th:text="${despesa.nome}"></td>
+            <td th:text="${despesa.tipo}"></td>
+            <td th:text="${despesa.valor}"></td>
+            <td th:text="${despesa.descricao}"></td>
+            <td>
+
+                <div class="action-buttons">
+                    <form th:action="@{/gestao-despesas/atualizar-despesa}" method="get">
+                        <input type="hidden" name="id" th:value="${despesa.id}">
+                        <button class="btn btn-secondary btn-sm">Atualizar</button>
+                    </form>
+                    <form th:action="@{'/despesas/' + ${despesa.id}}" method="post">
+                        <input type="hidden" name="_method" value="delete"/>
+                        <button class="btn btn-danger btn-sm">Excluir</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        <tr class="table-secondary">
+            <td colspan="3" class="text-end"><strong>Total:</strong></td>
+            <td th:text="${total}"></td>
+            <td colspan="2"></td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+<footer class="bg-dark-green text-white text-center py-3 mt-auto">
+    <div class="container">
+        <p class="mb-0">© 2025 Despesa Fácil.</p>
+        <p class="mb-0">Desenvolvido por Breno Nunes.</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

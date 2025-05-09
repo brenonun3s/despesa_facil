@@ -1,0 +1,9 @@
+CREATE TABLE despesas
+(
+    id SERIAL PRIMARY KEY,
+    nome varchar(50) NOT NULL,
+    tipo_despesa varchar(50) NOT NULL,
+    valor double precision NOT NULL,
+    descricao varchar(200)
+
+)

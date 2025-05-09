@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Despesa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .bg-dark-green {
+            background-color: #006400;
+        }
+
+        .btn-dark-green {
+            background-color: #006400;
+            color: #fff;
+        }
+
+        .btn-dark-green:hover {
+            background-color: #004d00;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<header class="navbar navbar-expand-lg navbar-dark bg-dark-green">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" th:href="@{/gestao-despesas/cadastrar-despesa}">Cadastrar uma Despesa</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/gestao-despesas/minhas-despesas}">Minhas Despesas</a></li>
+            </ul>
+            <a class="nav-link text-light" th:href="@{/gestao-despesas/sobre}">Sobre</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- Mensagem de Sucesso -->
+    <div th:if="${mensagem}" class="container mt-3">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <span th:text="${mensagem}">Mensagem de sucesso</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+        </div>
+    </div>
+
+    <!-- Formulário -->
+    <div class="form-card">
+        <h2 class="text-center">Cadastrar Despesa</h2>
+        <form th:action="@{/despesas/salvar-despesa}" method="post" th:object="${despesa}">
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" th:field="*{nome}" placeholder="Digite o nome da despesa" maxlength="50" required>
+            </div>
+            <div class="mb-3">
+                <label for="tipo" class="form-label">Tipo de Despesa</label>
+                <input type="text" class="form-control" id="tipo" th:field="*{tipo}" placeholder="Digite o tipo da despesa (EX.: Assinatura, Moradia, Boleto)" maxlength="50" required>
+            </div>
+            <div class="mb-3">
+                <label for="valor" class="form-label">Valor</label>
+                <input type="number" step="0.01" class="form-control" id="valor" th:field="*{valor}" placeholder="Digite o valor" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="descricao" class="form-label">Descrição</label>
+                <textarea class="form-control" id="descricao" th:field="*{descricao}" rows="3" placeholder="Digite uma descrição (máximo 200 caracteres)" maxlength="200"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-dark-green w-100">Salvar</button>
+        </form>
+    </div>
+</main>
+
+<footer class="bg-dark-green text-white text-center py-3 mt-auto">
+    <div class="container">
+        <p class="mb-0">© 2025 Despesa Fácil.</p>
+        <p class="mb-0">Desenvolvido por Breno Nunes.</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

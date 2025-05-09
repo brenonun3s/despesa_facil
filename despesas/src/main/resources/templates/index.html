@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciador de Despesas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .bg-dark-green {
+      background-color: #006400;
+    }
+    .text-light-green {
+      color: #d0f0c0;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+    .btn-dark-green {
+      background-color: #006400;
+      color: #fff;
+    }
+    .btn-dark-green:hover {
+      background-color: #004d00;
+    }
+  </style>
+</head>
+<body>
+<header class="navbar navbar-expand-lg navbar-dark bg-dark-green">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="index.html">Início</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{gestao-despesas/cadastrar-despesa}">Cadastrar uma Despesa</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{gestao-despesas/minhas-despesas}">Minhas Despesas</a>
+        </li>
+      </ul>
+      <a class="nav-link sobre text-light-green" th:href="@{gestao-despesas/sobre}">Sobre</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div>
+    <h1>Bem-vindo ao Despesa Fácil!</h1>
+    <p>Gerencie suas despesas de forma eficiente e organizada!</p>
+    <a th:href="@{gestao-despesas/cadastrar-despesa}" class="btn btn-dark-green">Começar</a>
+  </div>
+</main>
+
+<footer class="bg-dark-green text-white text-center py-3 mt-auto">
+  <div class="container">
+    <p class="mb-0">© 2025 Despesa Fácil.</p>
+    <p class="mb-0">Desenvolvido por Breno Nunes.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
