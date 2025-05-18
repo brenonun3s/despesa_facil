@@ -1,4 +1,4 @@
-CREATE TABLE despesas
+CREATE TABLE tb_despesas
 (
     id SERIAL PRIMARY KEY,
     nome varchar(50) NOT NULL,
@@ -7,3 +7,13 @@ CREATE TABLE despesas
     descricao varchar(200)
 
 )
+
+CREATE TABLE tb_usuarios(
+    id UUID PRIMARY KEY,
+    nome_usuario varchar(255) NOT NULL,
+    usuario_senha varchar(20) NOT NULL,
+    email_usuario varchar(255) NOT NULL,
+    roles_usuario varchar(50) NOT NULL
+)
+
+

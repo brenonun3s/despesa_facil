@@ -1,18 +1,20 @@
-package com.example.demo.model;
+package com.example.demo.model.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Table(name = "despesas")
+@Table(name = "tb_despesas")
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class Despesa {
 
     @Id
@@ -37,6 +39,12 @@ public class Despesa {
     @Size(max = 200)
     @Column(name = "descricao", nullable = false, length = 200)
     private String descricao;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
+
 
     
 

@@ -70,7 +70,6 @@
     <table class="table table-bordered table-hover">
         <thead class="table-dark">
         <tr>
-            <th>ID</th>
             <th>Nome da Despesa</th>
             <th>Tipo</th>
             <th>Valor</th>
@@ -80,7 +79,6 @@
         </thead>
         <tbody>
         <tr th:each="despesa : ${despesas}">
-            <td th:text="${despesa.id}"></td>
             <td th:text="${despesa.nome}"></td>
             <td th:text="${despesa.tipo}"></td>
             <td th:text="${despesa.valor}"></td>

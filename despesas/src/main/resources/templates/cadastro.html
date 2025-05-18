@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Despesa Fácil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .bg-dark-green {
+            background-color: #006400;
+        }
+        .text-light-green {
+            color: #d0f0c0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            /* Removi o text-align: center para melhor alinhamento do formulário */
+        }
+        .btn-dark-green {
+            background-color: #006400;
+            color: #fff;
+        }
+        .btn-dark-green:hover {
+            background-color: #004d00;
+        }
+        .form-container {
+            max-width: 400px;
+            width: 100%;
+            /* alinhamento dos textos do formulário */
+            text-align: left;
+        }
+        /* Espaçamento entre alertas e formulário */
+        .alert {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+<header class="navbar navbar-expand-lg navbar-dark bg-dark-green">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Despesa Fácil</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto"></ul>
+            <a class="nav-link text-light-green" th:href="@{/}">Voltar para Login</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="form-container">
+        <h2 class="mb-4">Cadastro</h2>
+
+        <!-- Mensagens de feedback -->
+        <div th:if="${mensagemSucesso}" class="alert alert-success" role="alert" th:text="${mensagemSucesso}"></div>
+        <div th:if="${mensagemErro}" class="alert alert-danger" role="alert" th:text="${mensagemErro}"></div>
+
+
+        <form th:action="@{/registrar}" method="post" th:object="${usuario}">
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" th:field="*{nome}" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">E-mail</label>
+                <input type="email" class="form-control" id="email" th:field="*{email}" required>
+            </div>
+            <div class="mb-3">
+                <label for="senha" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="senha" th:field="*{senha}" required>
+            </div>
+            <button type="submit" class="btn btn-dark-green w-100">Cadastrar</button>
+        </form>
+        <p class="mt-3">Já tem conta? <a th:href="@{/login}">Faça login</a></p>
+    </div>
+</main>
+
+<footer class="bg-dark-green text-white text-center py-3 mt-auto">
+    <div class="container">
+        <p class="mb-0">© 2025 Despesa Fácil.</p>
+        <p class="mb-0">Desenvolvido por Breno Nunes.</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

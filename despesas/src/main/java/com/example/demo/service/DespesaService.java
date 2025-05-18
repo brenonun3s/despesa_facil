@@ -2,7 +2,7 @@ package com.example.demo.service;
 
 
 import com.example.demo.exceptions.DespesaNotFoundException;
-import com.example.demo.model.Despesa;
+import com.example.demo.model.entity.Despesa;
 import com.example.demo.repository.DespesaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,24 +15,24 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class DespesaService {
 
-    private final DespesaRepository repository;
+    private final DespesaRepository despesaRepository;
 
     @Transactional
     public Despesa registrarDespesa(Despesa despesa) {
-        return repository.save(despesa);
+        return despesaRepository.save(despesa);
     }
 
     @Transactional
     public void deletar(Integer id) {
-        if (!repository.existsById(id)) {
+        if (!despesaRepository.existsById(id)) {
             throw new DespesaNotFoundException("Despesa Não localizada com esse ID");
         }
-        repository.deleteById(id);
+        despesaRepository.deleteById(id);
     }
 
     @Transactional
     public void atualizar(Despesa despesaAtualizada) {
-        repository.findById(despesaAtualizada.getId()).ifPresent(despesaExistente -> {
+        despesaRepository.findById(despesaAtualizada.getId()).ifPresent(despesaExistente -> {
             despesaExistente.setNome(despesaAtualizada.getNome());
             despesaExistente.setTipo(despesaAtualizada.getTipo());
             despesaExistente.setValor(despesaAtualizada.getValor());
@@ -40,16 +40,27 @@ public class DespesaService {
         });
     }
 
-    public List<Despesa> listarTodasAsDespesas() {
-        long contagem = repository.count();
-        if (contagem == 0) {
-            throw new DespesaNotFoundException("Não Existem Despesas Cadastradas");
-        }
-        return repository.findAll();
+//    public List<Despesa> listarTodasAsDespesas() {
+//        long contagem = despesaRepository.count();
+//        if (contagem == 0) {
+//            throw new DespesaNotFoundException("Não Existem Despesas Cadastradas");
+//        }
+//        return despesaRepository.findAll();
+//    }
+//
+//    public Double listarTotal() {
+//        return despesaRepository.calcularTotalDespesas();
+//    }
+
+    public List<Despesa> listarDespesasPorUsuario(UUID usuarioId) {
+        return despesaRepository.findByUsuarioId(usuarioId);
     }
 
-    public Double listarTotal() {
-        return repository.calcularTotalDespesas();
+    public Double calcularTotalPorUsuario(UUID usuarioId) {
+        List<Despesa> despesas = listarDespesasPorUsuario(usuarioId);
+        return despesas.stream()
+                .mapToDouble(Despesa::getValor)
+                .sum();
     }
 
 
