@@ -1,10 +1,12 @@
-# Etapa 1: Compila o projeto com Maven
 FROM maven:3.9.6-eclipse-temurin-21 AS build
 WORKDIR /app
-COPY . .
+
+# Copie o POM primeiro para aproveitar o cache de dependências
+COPY pom.xml .
+COPY src ./src
+
 RUN mvn clean package -DskipTests
 
-# Etapa 2: Imagem leve para rodar o app
 FROM eclipse-temurin:21-jdk
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
