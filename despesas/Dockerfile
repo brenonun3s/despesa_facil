@@ -1,14 +1,12 @@
-# Usa uma imagem base do Java 21
-FROM eclipse-temurin:21-jdk
-
-# Define o diretório de trabalho
+# Etapa 1: Compila o projeto com Maven
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Copia o JAR gerado na pasta target
-COPY target/*.jar app.jar
-
-# Expõe a porta padrão do Spring Boot
+# Etapa 2: Imagem leve para rodar o app
+FROM eclipse-temurin:21-jdk
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
-
-# Comando para rodar a aplicação
 ENTRYPOINT ["java", "-jar", "app.jar"]
