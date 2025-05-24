@@ -2,9 +2,9 @@ spring:
   application:
     name: despesas
   datasource:
-    url: jdbc:postgresql://aws-0-sa-east-1.pooler.supabase.com:5432/postgres
-    username: postgres.vheokzydhkcialrinfdx
-    password: F1r3w@@ll
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     show-sql: true
@@ -17,8 +17,9 @@ spring:
     suffix: .html
 openai:
   api:
-    key: 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
+    key: ${CHAVE_API_IA}
 logging:
   pattern:
     console: '%clr(%d{dd-MM-yyyy HH:mm:ss}){faint} %clr(%5p) %clr([%t]){faint} %clr(%-40.40logger){cyan} %clr(:){yellow} %m%n'
-
+server:
+  port: ${PORT:8080}
