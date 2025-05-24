@@ -15,5 +15,10 @@ spring:
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
-
+openai:
+  api:
+    key: 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
+logging:
+  pattern:
+    console: '%clr(%d{dd-MM-yyyy HH:mm:ss}){faint} %clr(%5p) %clr([%t]){faint} %clr(%-40.40logger){cyan} %clr(:){yellow} %m%n'
 

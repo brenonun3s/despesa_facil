@@ -20,8 +20,11 @@ public class SecurityConfig {
 
     private final UserDetailsService userDetailsService;
 
-    public SecurityConfig(UserDetailsService userDetailsService) {
+    private final CustomAuthenticationFailureHandler failuredHandler;
+
+    public SecurityConfig(UserDetailsService userDetailsService, CustomAuthenticationFailureHandler failuredHandler) {
         this.userDetailsService = userDetailsService;
+        this.failuredHandler = failuredHandler;
     }
 
     @Bean
@@ -32,9 +35,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(Customizer.withDefaults())
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/api/chat"))
+
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login", "/cadastro", "/registrar").permitAll()
+                        .requestMatchers("/api/chat").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form ->
@@ -42,6 +48,7 @@ public class SecurityConfig {
                                 .loginProcessingUrl("/login")
                                 .usernameParameter("email")// URL que processa o POST
                                 .defaultSuccessUrl("/gestao-despesas/index", true) // redireciona após login
+                                .failureHandler(failuredHandler)
                                 .permitAll()
                 )
                 .logout(logout -> logout

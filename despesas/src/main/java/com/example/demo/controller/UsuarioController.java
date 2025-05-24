@@ -5,6 +5,7 @@ import com.example.demo.dto.UsuarioResponse;
 import com.example.demo.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,16 +18,23 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
 
     @PostMapping("/registrar")
-    public String registrar(@ModelAttribute UsuarioDTO usuarioDTO, RedirectAttributes redirectAttributes) {
+    public String registrar(@ModelAttribute("usuario") UsuarioDTO usuarioDTO,
+                            RedirectAttributes redirectAttributes,
+                            Model model) {
         try {
             usuarioService.cadastrarUsuario(usuarioDTO);
             redirectAttributes.addFlashAttribute("mensagemSucesso", "Cadastro realizado com sucesso!");
+            return "redirect:/login";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("mensagemErro", e.getMessage());
+            model.addAttribute("usuario", usuarioDTO);
+            return "cadastro";
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("mensagemErro", "Erro ao realizar cadastro: " + e.getMessage());
+            model.addAttribute("mensagemErro", "Erro inesperado: " + e.getMessage());
+            model.addAttribute("usuario", usuarioDTO);
+            return "cadastro";
         }
-        return "redirect:/login";
     }
-
 
 
     @PutMapping("/atualizar")

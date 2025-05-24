@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+
 @Controller
 public class LoginController {
 
@@ -14,9 +15,12 @@ public class LoginController {
     }
 
     @GetMapping("/cadastro")
-    public String novoCadastro(Model model) {
-        model.addAttribute("usuario", new Usuario());
+    public String mostrarFormularioCadastro(Model model) {
+        if (!model.containsAttribute("usuario")) {
+            model.addAttribute("usuario", new Usuario());
+        }
         return "cadastro";
     }
+
 
 }
