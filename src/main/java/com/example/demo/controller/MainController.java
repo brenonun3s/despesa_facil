@@ -27,13 +27,9 @@ public class MainController {
     @GetMapping("/cadastrar-despesa")
     public String exibirFormularioDespesa(Model model) {
         model.addAttribute("despesa", new Despesa());
-        return "/cadastrardespesa";
+        return "cadastrardespesa";
     }
 
-    @GetMapping("")
-    public String index() {
-        return "index";
-    }
 
     @GetMapping("/minhas-despesas")
     public String exibirMinhasDespesas(Model model, Authentication authentication) {
@@ -59,23 +55,23 @@ public class MainController {
 
     @GetMapping("/sobre")
     public String exibirSobre() {
-        return "/sobre";
+        return "sobre";
     }
 
     @GetMapping("/index")
     public String exibirIndex() {
-        return "/index";
+        return "index";
     }
 
     @GetMapping("/atualizar-despesa")
     public String exibirAtualizarDespesa(Model model, Despesa despesa) {
         model.addAttribute("despesa", despesa);
-        return "/atualizardespesa";
+        return "atualizardespesa";
     }
 
     @GetMapping("/bot")
     public String exibirBot() {
-        return "/chat";
+        return "chat";
     }
 
 
