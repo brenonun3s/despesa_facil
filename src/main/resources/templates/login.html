@@ -66,9 +66,12 @@
                 <label for="email" class="form-label">Email Usuário</label>
                 <input type="text" class="form-control" id="email" name="email" required>
             </div>
-            <div class="mb-3 text-start">
+            <div class="mb-3 text-start position-relative">
                 <label for="password" class="form-label">Senha</label>
                 <input type="password" class="form-control" id="password" name="password" required>
+                <button type="button" class="btn btn-sm btn-outline-secondary position-absolute top-50 end-0 translate-middle-y me-2" onclick="toggleSenha()" style="z-index: 2;">
+                    👁️
+                </button>
             </div>
             <button type="submit" class="btn btn-dark-green w-100">Entrar</button>
         </form>
@@ -87,5 +90,21 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    function toggleSenha() {
+      const senhaInput = document.getElementById('password');
+      const botao = event.target;
+  
+      if (senhaInput.type === "password") {
+        senhaInput.type = "text";
+        botao.innerText = "🙈";
+      } else {
+        senhaInput.type = "password";
+        botao.innerText = "👁️";
+      }
+    }
+  </script>
+  
 </body>
 </html>

@@ -1,19 +1,20 @@
 package com.example.demo.service;
 
 
-import com.example.demo.dto.UsuarioDTO;
-import com.example.demo.dto.UsuarioResponse;
-import com.example.demo.model.entity.Usuario;
-import com.example.demo.repository.DespesaRepository;
-import com.example.demo.repository.UsuarioRepository;
-import lombok.RequiredArgsConstructor;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import com.example.demo.dto.UsuarioDTO;
+import com.example.demo.dto.UsuarioResponse;
+import com.example.demo.model.entity.Usuario;
+import com.example.demo.repository.UsuarioRepository;
+
+import lombok.RequiredArgsConstructor;
 
 
 @Service
@@ -23,7 +24,7 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
     private static final Logger log = LoggerFactory.getLogger(UsuarioService.class);
-    private final DespesaRepository despesaRepository;
+
 
 
     private static final String ROLE_USER = "ROLE_USER";
