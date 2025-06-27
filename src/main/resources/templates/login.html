@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Despesa Fácil</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
     <style>
         .bg-dark-green {
             background-color: #006400;
         }
+
         .text-light-green {
             color: #d0f0c0;
         }
+
         body {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
+
         main {
             flex: 1;
             display: flex;
@@ -26,85 +32,97 @@
             text-align: center;
             padding: 20px;
         }
+
         .btn-dark-green {
             background-color: #006400;
             color: #fff;
         }
+
         .btn-dark-green:hover {
             background-color: #004d00;
         }
+
         .form-container {
             max-width: 400px;
             width: 100%;
         }
     </style>
 </head>
+
 <body>
-<header class="navbar navbar-expand-lg navbar-dark bg-dark-green">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Despesa Fácil</a>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto"></ul>
-        </div>
-    </div>
-</header>
-
-<main>
-    <div class="form-container">
-        <h4 class="mb-3 text-success">Bem-vindo ao Despesa Fácil!</h4>
-        <p class="mb-4">Gerencie suas despesas de forma eficiente e organizada!</p>
-
-        <h2 class="mb-4">Login</h2>
-
-        <div th:if="${param.error}" class="alert alert-danger text-start">
-            Usuário ou senha inválidos. Tente novamente.
-        </div>
-
-
-        <form th:action="@{/login}" method="post">
-            <div class="mb-3 text-start">
-                <label for="email" class="form-label">Email Usuário</label>
-                <input type="text" class="form-control" id="email" name="email" required>
+    <header class="navbar navbar-expand-lg navbar-dark bg-dark-green">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Despesa Fácil</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto"></ul>
             </div>
-            <div class="mb-3 text-start position-relative">
-                <label for="password" class="form-label">Senha</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-                <button type="button" class="btn btn-sm btn-outline-secondary position-absolute top-50 end-0 translate-middle-y me-2" onclick="toggleSenha()" style="z-index: 2;">
-                    👁️
-                </button>
+        </div>
+    </header>
+
+    <main>
+        <div class="form-container">
+            <h4 class="mb-3 text-success">Bem-vindo ao Despesa Fácil!</h4>
+            <p class="mb-4">Gerencie suas despesas de forma eficiente e organizada!</p>
+
+            <h2 class="mb-4">Login</h2>
+
+            <div th:if="${param.error}" class="alert alert-danger text-start">
+                Usuário ou senha inválidos. Tente novamente.
             </div>
-            <button type="submit" class="btn btn-dark-green w-100">Entrar</button>
-        </form>
-        <p class="mt-3">
-            Ainda não tem conta?
-            <a th:href="@{/cadastro}" class="text-blue-600 hover:underline">Cadastre-se</a>
-        </p>
-    </div>
-</main>
 
-<footer class="bg-dark-green text-white text-center py-3 mt-auto">
-    <div class="container">
-        <p class="mb-0">© 2025 Despesa Fácil.</p>
-        <p class="mb-0">Desenvolvido por Breno Nunes.</p>
-    </div>
-</footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+            <form th:action="@{/login}" method="post">
+                <div class="mb-3 text-start">
+                    <label for="email" class="form-label">Email Usuário</label>
+                    <input type="text" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="mb-3 text-start">
+                    <label for="password" class="form-label">Senha</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="password" name="password" required>
+                        <button class="btn btn-outline-secondary" type="button" onclick="toggleSenha()">
+                            <i class="bi bi-eye" id="iconeSenha"></i>
+                        </button>
+                    </div>
+                </div>
 
-<script>
-    function toggleSenha() {
-      const senhaInput = document.getElementById('password');
-      const botao = event.target;
-  
-      if (senhaInput.type === "password") {
-        senhaInput.type = "text";
-        botao.innerText = "🙈";
-      } else {
-        senhaInput.type = "password";
-        botao.innerText = "👁️";
-      }
-    }
-  </script>
-  
+                <button type="submit" class="btn btn-dark-green w-100">Entrar</button>
+            </form>
+            <p class="mt-3">
+                Ainda não tem conta?
+                <a th:href="@{/cadastro}" class="text-blue-600 hover:underline">Cadastre-se</a>
+            </p>
+        </div>
+    </main>
+
+    <footer class="bg-dark-green text-white text-center py-3 mt-auto">
+        <div class="container">
+            <p class="mb-0">© 2025 Despesa Fácil.</p>
+            <p class="mb-0">Desenvolvido por Breno Nunes.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function toggleSenha() {
+            const input = document.getElementById("password");
+            const icone = document.getElementById("iconeSenha");
+
+            if (input.type === "password") {
+                input.type = "text";
+                icone.classList.remove("bi-eye");
+                icone.classList.add("bi-eye-slash");
+            } else {
+                input.type = "password";
+                icone.classList.remove("bi-eye-slash");
+                icone.classList.add("bi-eye");
+            }
+        }
+    </script>
+
+
+
 </body>
+
 </html>
